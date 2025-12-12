@@ -8,292 +8,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #1a3a5c;
-            --secondary-color: #2d5a87;
-            --accent-color: #f4a261;
-            --accent-hover: #e76f51;
-            --light-blue: #89c4e8;
-            --snow-white: #f8fafc;
-            --text-dark: #1a1a2e;
-            --text-light: #6b7280;
-            --premium-gold: #d4af37;
-            --season-green: #22c55e;
-            --alpine-blue: #3b82f6;
-            --alpine-season-purple: #8b5cf6;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            overflow-x: hidden;
-            background: var(--snow-white);
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 15px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(26, 58, 92, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            position: relative;
-        }
-
-        .logo-icon::before,
-        .logo-icon::after {
-            content: '';
-            position: absolute;
-            background: white;
-            border-radius: 2px;
-        }
-
-        .logo-icon::before {
-            width: 4px;
-            height: 40px;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-15deg);
-        }
-
-        .logo-icon::after {
-            width: 4px;
-            height: 40px;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%) rotate(15deg);
-        }
-
-        .nav {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
-
-        .nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            position: relative;
-            padding: 5px 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav a:hover::after {
-            width: 100%;
-        }
-
-        .nav a:hover {
-            color: var(--accent-color);
-        }
-
-        .nav a.active {
-            color: var(--accent-color);
-        }
-
-        .nav a.active::after {
-            width: 100%;
-        }
-
-        .nav-btn {
-            background: var(--accent-color);
-            color: white !important;
-            padding: 12px 25px !important;
-            border-radius: 30px;
-            font-weight: 600 !important;
-            transition: all 0.3s ease !important;
-        }
-
-        .nav-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(244, 162, 97, 0.4);
-        }
-
-        .nav-btn::after {
-            display: none !important;
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
-        /* Page Header */
-        .page-header {
-            padding: 180px 50px 100px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-            color: white;
-        }
-
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        .snow-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .snow-particle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: float-particle 15s infinite;
-        }
-
-        @keyframes float-particle {
-            0%, 100% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px);
-                opacity: 0;
-            }
-        }
-
-        .page-header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .page-tag {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        .page-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        .page-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            animation: fadeInUp 0.8s ease 0.4s both;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* Products Section */
         .products-section {
-            padding: 100px 50px;
-            background: var(--snow-white);
+            padding: var(--spacing-6xl) var(--spacing-3xl);
+            background: var(--color-snow-white);
         }
 
         .product-category {
-            max-width: 1400px;
-            margin: 0 auto 100px;
+            max-width: var(--container-xl);
+            margin: 0 auto var(--spacing-6xl);
         }
 
         .product-category:last-child {
@@ -303,11 +28,11 @@
         .category-header {
             display: flex;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 50px;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-3xl);
             opacity: 0;
             transform: translateX(-30px);
-            transition: all 0.6s ease;
+            transition: all var(--transition-slow);
         }
 
         .category-header.visible {
@@ -318,51 +43,51 @@
         .category-icon {
             width: 80px;
             height: 80px;
-            border-radius: 20px;
+            border-radius: var(--radius-xl);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: var(--font-size-2xl);
             color: white;
             flex-shrink: 0;
         }
 
         .category-icon.premium {
-            background: linear-gradient(135deg, var(--premium-gold), #b8860b);
+            background: linear-gradient(135deg, var(--color-premium-gold), #b8860b);
         }
 
         .category-icon.season {
-            background: linear-gradient(135deg, var(--season-green), #16a34a);
+            background: linear-gradient(135deg, var(--color-season-green), #16a34a);
         }
 
         .category-icon.alpine {
-            background: linear-gradient(135deg, var(--alpine-blue), #2563eb);
+            background: linear-gradient(135deg, var(--color-alpine-blue), #2563eb);
         }
 
         .category-icon.alpine-season {
-            background: linear-gradient(135deg, var(--alpine-season-purple), #7c3aed);
+            background: linear-gradient(135deg, var(--color-alpine-purple), #7c3aed);
         }
 
         .category-info h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 8px;
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-black);
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-sm);
         }
 
         .category-info p {
-            color: var(--text-light);
-            font-size: 1rem;
+            color: var(--color-text-light);
+            font-size: var(--font-size-base);
         }
 
         /* Price Table */
         .price-table-wrapper {
             overflow-x: auto;
-            border-radius: 20px;
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s ease 0.2s;
+            transition: all var(--transition-slow) 0.2s;
         }
 
         .price-table-wrapper.visible {
@@ -378,92 +103,92 @@
         }
 
         .price-table thead {
-            background: var(--primary-color);
+            background: var(--color-primary);
             color: white;
         }
 
         .price-table thead.premium {
-            background: linear-gradient(135deg, var(--premium-gold), #b8860b);
+            background: linear-gradient(135deg, var(--color-premium-gold), #b8860b);
         }
 
         .price-table thead.season {
-            background: linear-gradient(135deg, var(--season-green), #16a34a);
+            background: linear-gradient(135deg, var(--color-season-green), #16a34a);
         }
 
         .price-table thead.alpine {
-            background: linear-gradient(135deg, var(--alpine-blue), #2563eb);
+            background: linear-gradient(135deg, var(--color-alpine-blue), #2563eb);
         }
 
         .price-table thead.alpine-season {
-            background: linear-gradient(135deg, var(--alpine-season-purple), #7c3aed);
+            background: linear-gradient(135deg, var(--color-alpine-purple), #7c3aed);
         }
 
         .price-table th {
-            padding: 20px 15px;
+            padding: var(--spacing-xl) var(--spacing-md);
             text-align: center;
-            font-weight: 700;
-            font-size: 1rem;
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-base);
         }
 
         .price-table td {
-            padding: 18px 15px;
+            padding: var(--spacing-lg) var(--spacing-md);
             text-align: center;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--color-light-gray);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-dark);
+            transition: var(--transition-normal);
         }
 
         .price-table tbody tr {
-            transition: all 0.3s ease;
+            transition: var(--transition-normal);
         }
 
         .price-table tbody tr:hover {
-            background: #f8fafc;
+            background: var(--color-snow-white);
             transform: scale(1.01);
         }
 
         .price-table tbody tr:hover td {
-            color: var(--primary-color);
+            color: var(--color-primary);
         }
 
         .price-table .lesson-name {
-            font-weight: 600;
+            font-weight: var(--font-weight-semibold);
             text-align: left;
-            padding-left: 25px;
+            padding-left: var(--spacing-xl);
         }
 
         .price-table .price {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--primary-color);
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-md);
+            color: var(--color-primary);
         }
 
         .price-table .price.premium-price {
-            color: var(--premium-gold);
+            color: var(--color-premium-gold);
         }
 
         .price-table .price.season-price {
-            color: var(--season-green);
+            color: var(--color-season-green);
         }
 
         .price-table .price.alpine-price {
-            color: var(--alpine-blue);
+            color: var(--color-alpine-blue);
         }
 
         .price-table .price.alpine-season-price {
-            color: var(--alpine-season-purple);
+            color: var(--color-alpine-purple);
         }
 
         .popular-badge {
             display: inline-block;
-            background: var(--accent-color);
+            background: var(--color-accent);
             color: white;
-            padding: 4px 10px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: 10px;
+            padding: 4px var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            margin-left: var(--spacing-sm);
             animation: pulse 2s infinite;
         }
 
@@ -476,54 +201,54 @@
             display: inline-block;
             background: #ef4444;
             color: white;
-            padding: 4px 10px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: 10px;
+            padding: 4px var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            margin-left: var(--spacing-sm);
         }
 
         .original-price {
             text-decoration: line-through;
-            color: #9ca3af;
-            font-size: 0.85rem;
-            margin-right: 8px;
+            color: var(--color-text-muted);
+            font-size: var(--font-size-sm);
+            margin-right: var(--spacing-sm);
         }
 
         /* Feature Tags */
         .feature-tags {
             display: flex;
-            gap: 8px;
+            gap: var(--spacing-sm);
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .feature-tag {
-            background: #f0f9ff;
-            color: var(--secondary-color);
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
+            background: rgba(26, 58, 92, 0.1);
+            color: var(--color-secondary);
+            padding: 4px var(--spacing-sm);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
         }
 
         /* Info Cards */
         .info-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
         }
 
         .info-card {
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid var(--accent-color);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--color-accent);
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.4s ease;
+            transition: all var(--transition-normal);
         }
 
         .info-card.visible {
@@ -533,210 +258,67 @@
 
         .info-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
         }
 
         .info-card h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 10px;
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-sm);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: var(--spacing-sm);
         }
 
         .info-card h4 i {
-            color: var(--accent-color);
+            color: var(--color-accent);
         }
 
         .info-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.7;
+            color: var(--color-text-light);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-relaxed);
         }
 
         /* CTA Section */
         .cta-section {
-            padding: 80px 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: var(--spacing-4xl) var(--spacing-3xl);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
             text-align: center;
             color: white;
         }
 
         .cta-content {
-            max-width: 700px;
+            max-width: var(--container-md);
             margin: 0 auto;
         }
 
         .cta-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 15px;
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-black);
+            margin-bottom: var(--spacing-md);
         }
 
         .cta-desc {
-            font-size: 1.1rem;
+            font-size: var(--font-size-md);
             opacity: 0.9;
-            margin-bottom: 30px;
+            margin-bottom: var(--spacing-xl);
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 40px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-white {
-            background: white;
-            color: var(--primary-color);
-        }
-
-        .btn-white:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-accent {
-            background: var(--accent-color);
-            color: white;
-            margin-left: 15px;
-        }
-
-        .btn-accent:hover {
-            background: var(--accent-hover);
-            transform: translateY(-3px);
-        }
-
-        /* Footer */
-        .footer {
-            background: #0f172a;
-            color: white;
-            padding: 60px 50px 30px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            margin-bottom: 40px;
-        }
-
-        .footer-brand .logo {
-            margin-bottom: 20px;
-        }
-
-        .footer-brand p {
-            color: #94a3b8;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .social-links {
+        .cta-buttons {
             display: flex;
-            gap: 15px;
-        }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--accent-color);
-            transform: translateY(-3px);
-        }
-
-        .footer-column h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-column ul a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-column ul a:hover {
-            color: var(--accent-color);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 30px;
-            text-align: center;
-            color: #64748b;
-            font-size: 0.9rem;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
         }
 
         /* Mobile Responsive */
-        @media (max-width: 992px) {
-            .menu-toggle {
-                display: flex;
-            }
-
-            .nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                max-width: 400px;
-                height: 100vh;
-                background: var(--primary-color);
-                flex-direction: column;
-                justify-content: center;
-                gap: 30px;
-                padding: 50px;
-                transition: right 0.4s ease;
-            }
-
-            .nav.active {
-                right: 0;
-            }
-
-            .header {
-                padding: 15px 25px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
         @media (max-width: 768px) {
-            .page-header,
             .products-section,
-            .cta-section,
-            .footer {
-                padding-left: 25px;
-                padding-right: 25px;
+            .cta-section {
+                padding-left: var(--spacing-xl);
+                padding-right: var(--spacing-xl);
             }
 
             .category-header {
@@ -745,93 +327,34 @@
             }
 
             .price-table .lesson-name {
-                padding-left: 15px;
+                padding-left: var(--spacing-md);
             }
 
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
             }
-
-            .social-links {
-                justify-content: center;
-            }
-
-            .cta-section .btn {
-                display: block;
-                margin: 10px auto;
-            }
-
-            .btn-accent {
-                margin-left: 0;
-            }
-        }
-
-        /* Loader */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-color);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        .loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <!-- Loader -->
-    <div class="loader" id="loader">
-        <div class="loader-spinner"></div>
-    </div>
+    <div class="loader" id="loader"><div class="loader-spinner"></div></div>
 
-    <!-- Header -->
-    <header class="header">
-        <a href="index.html" class="logo">
-            <div class="logo-icon"></div>
-            SKI LESSON
-        </a>
+    <header class="header solid">
+        <a href="index.html" class="logo"><div class="logo-icon"></div>SKI LESSON</a>
         <nav class="nav" id="nav">
             <a href="products.html" class="active">강습 상품</a>
             <a href="gallery.html">강습 갤러리</a>
-            <a href="#book" class="nav-btn">예약하기</a>
-            <a href="index.html#reviews">후기</a>
-            <a href="index.html#rental">직영 렌탈샵</a>
-            <a href="index.html#faq">자주묻는질문</a>
-            <a href="index.html#notice">공지</a>
+            <a href="booking.html" class="nav-btn">예약하기</a>
+            <a href="reviews.html">후기</a>
+            <a href="rental.html">직영 렌탈샵</a>
+            <a href="faq.html">자주묻는질문</a>
+            <a href="notice.html">공지</a>
         </nav>
-        <div class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
     </header>
 
-    <!-- Page Header -->
     <section class="page-header">
-        <div class="snow-particles" id="snowParticles"></div>
         <div class="page-header-content">
             <span class="page-tag"><i class="fas fa-skiing"></i> LESSON PRODUCTS</span>
             <h1 class="page-title">강습 상품 안내</h1>
@@ -839,7 +362,6 @@
         </div>
     </section>
 
-    <!-- Products Section -->
     <section class="products-section">
 
         <!-- Premium Lesson -->
@@ -1150,139 +672,49 @@
 
     </section>
 
-    <!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-content">
             <h2 class="cta-title">지금 바로 상담 받아보세요!</h2>
             <p class="cta-desc">전문 상담사가 고객님께 최적의 강습 프로그램을 추천해 드립니다.</p>
-            <div>
-                <a href="tel:02-1234-5678" class="btn btn-white">
-                    <i class="fas fa-phone"></i> 전화 상담
-                </a>
-                <a href="#" class="btn btn-accent">
-                    <i class="fas fa-calendar-alt"></i> 온라인 예약
-                </a>
+            <div class="cta-buttons">
+                <a href="tel:02-1234-5678" class="btn btn-white"><i class="fas fa-phone"></i> 전화 상담</a>
+                <a href="booking.html" class="btn btn-accent"><i class="fas fa-calendar-alt"></i> 온라인 예약</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <a href="index.html" class="logo">
-                    <div class="logo-icon"></div>
-                    SKI LESSON
-                </a>
-                <p>전문 강사진과 함께하는 최고의 스키 강습 서비스. 초보자부터 전문가까지 모든 레벨을 위한 맞춤형 프로그램을 제공합니다.</p>
+                <a href="index.html" class="logo"><div class="logo-icon"></div>SKI LESSON</a>
+                <p>전문 강사진과 함께하는 최고의 스키 강습 서비스.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-youtube"></i></a>
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fas fa-blog"></i></a>
                 </div>
             </div>
-            <div class="footer-column">
-                <h4>강습 프로그램</h4>
-                <ul>
-                    <li><a href="#premium">프리미엄 강습</a></li>
-                    <li><a href="#season">시즌 강습</a></li>
-                    <li><a href="#alpine">알파인 강습</a></li>
-                    <li><a href="#alpine-season">알파인 시즌 강습</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>고객 지원</h4>
-                <ul>
-                    <li><a href="#">자주 묻는 질문</a></li>
-                    <li><a href="#">예약 안내</a></li>
-                    <li><a href="#">취소/환불 정책</a></li>
-                    <li><a href="#">오시는 길</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>연락처</h4>
-                <ul>
-                    <li><i class="fas fa-phone"></i> 02-1234-5678</li>
-                    <li><i class="fas fa-envelope"></i> info@skilesson.kr</li>
-                    <li><i class="fas fa-map-marker-alt"></i> 강원도 평창군</li>
-                </ul>
-            </div>
+            <div class="footer-column"><h4>강습 프로그램</h4><ul><li><a href="products.html">프리미엄 강습</a></li><li><a href="products.html">시즌 강습</a></li></ul></div>
+            <div class="footer-column"><h4>고객 지원</h4><ul><li><a href="faq.html">자주 묻는 질문</a></li><li><a href="notice.html">공지사항</a></li></ul></div>
+            <div class="footer-column"><h4>연락처</h4><ul><li><i class="fas fa-phone"></i> 02-1234-5678</li><li><i class="fas fa-envelope"></i> info@skilesson.kr</li></ul></div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 SKI LESSON. All rights reserved.</p>
-        </div>
+        <div class="footer-bottom"><p>&copy; 2025 SKI LESSON. All rights reserved.</p></div>
     </footer>
 
     <script>
-        // Loader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 800);
-        });
-
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const nav = document.getElementById('nav');
-
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-        });
-
-        // Close menu on link click
-        document.querySelectorAll('.nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-            });
-        });
-
-        // Snow Particles
-        function createSnowParticles() {
-            const container = document.getElementById('snowParticles');
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'snow-particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.bottom = '-10px';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particle.style.width = (Math.random() * 8 + 4) + 'px';
-                particle.style.height = particle.style.width;
-                container.appendChild(particle);
-            }
-        }
-        createSnowParticles();
+        window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('hidden'), 500));
+        document.getElementById('menuToggle').addEventListener('click', () => document.getElementById('nav').classList.toggle('active'));
 
         // Scroll Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
+                    setTimeout(() => entry.target.classList.add('visible'), index * 100);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        document.querySelectorAll('[data-animate]').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Table row hover effect with ripple
-        document.querySelectorAll('.price-table tbody tr').forEach(row => {
-            row.addEventListener('mouseenter', function(e) {
-                this.style.transform = 'scale(1.01)';
-            });
-            row.addEventListener('mouseleave', function(e) {
-                this.style.transform = 'scale(1)';
-            });
-        });
+        document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>

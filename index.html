@@ -8,166 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #1a3a5c;
-            --secondary-color: #2d5a87;
-            --accent-color: #f4a261;
-            --accent-hover: #e76f51;
-            --light-blue: #89c4e8;
-            --snow-white: #f8fafc;
-            --text-dark: #1a1a2e;
-            --text-light: #6b7280;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            overflow-x: hidden;
-            background: var(--snow-white);
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 15px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .header.scrolled {
-            background: rgba(26, 58, 92, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 10px 50px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            position: relative;
-        }
-
-        .logo-icon::before,
-        .logo-icon::after {
-            content: '';
-            position: absolute;
-            background: white;
-            border-radius: 2px;
-        }
-
-        .logo-icon::before {
-            width: 4px;
-            height: 40px;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-15deg);
-        }
-
-        .logo-icon::after {
-            width: 4px;
-            height: 40px;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%) rotate(15deg);
-        }
-
-        .nav {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
-
-        .nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            position: relative;
-            padding: 5px 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav a:hover::after {
-            width: 100%;
-        }
-
-        .nav a:hover {
-            color: var(--accent-color);
-        }
-
-        .nav-btn {
-            background: var(--accent-color);
-            color: white !important;
-            padding: 12px 25px !important;
-            border-radius: 30px;
-            font-weight: 600 !important;
-            transition: all 0.3s ease !important;
-        }
-
-        .nav-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(244, 162, 97, 0.4);
-        }
-
-        .nav-btn::after {
-            display: none !important;
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
         /* Hero Section */
         .hero {
             height: 100vh;
@@ -177,7 +19,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: linear-gradient(135deg, #1a3a5c 0%, #2d5a87 50%, #4a7aa7 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-secondary) 100%);
         }
 
         .hero-bg {
@@ -205,7 +47,6 @@
             background: linear-gradient(135deg, rgba(26, 58, 92, 0.7) 0%, rgba(45, 90, 135, 0.5) 100%);
         }
 
-        /* Snow Effect */
         .snow-container {
             position: absolute;
             top: 0;
@@ -220,18 +61,13 @@
             position: absolute;
             top: -10px;
             color: white;
-            font-size: 1rem;
             animation: snowfall linear infinite;
             opacity: 0.8;
         }
 
         @keyframes snowfall {
-            0% {
-                transform: translateY(-10px) rotate(0deg);
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-            }
+            0% { transform: translateY(-10px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
         }
 
         .hero-content {
@@ -239,98 +75,54 @@
             z-index: 10;
             text-align: left;
             color: white;
-            max-width: 1200px;
+            max-width: var(--container-xl);
             width: 100%;
-            padding: 0 50px;
+            padding: 0 var(--spacing-3xl);
         }
 
         .hero-subtitle {
-            font-size: 1.1rem;
-            font-weight: 500;
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-medium);
             letter-spacing: 3px;
-            margin-bottom: 20px;
+            margin-bottom: var(--spacing-lg);
             opacity: 0;
             transform: translateY(30px);
-            animation: slideUp 0.8s ease forwards 0.3s;
+            animation: fadeInUp 0.8s ease forwards 0.3s;
         }
 
         .hero-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 30px;
+            font-family: var(--font-family-heading);
+            font-size: clamp(var(--font-size-3xl), 6vw, var(--font-size-5xl));
+            font-weight: var(--font-weight-black);
+            line-height: var(--line-height-tight);
+            margin-bottom: var(--spacing-xl);
             opacity: 0;
             transform: translateY(30px);
-            animation: slideUp 0.8s ease forwards 0.5s;
+            animation: fadeInUp 0.8s ease forwards 0.5s;
         }
 
         .hero-title span {
             display: block;
-            color: var(--accent-color);
+            color: var(--color-accent);
         }
 
         .hero-desc {
-            font-size: 1.1rem;
+            font-size: var(--font-size-md);
             max-width: 500px;
-            margin-bottom: 40px;
+            margin-bottom: var(--spacing-2xl);
             opacity: 0.9;
-            line-height: 1.8;
+            line-height: var(--line-height-loose);
             opacity: 0;
             transform: translateY(30px);
-            animation: slideUp 0.8s ease forwards 0.7s;
-        }
-
-        @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            animation: fadeInUp 0.8s ease forwards 0.7s;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 20px;
+            gap: var(--spacing-lg);
             opacity: 0;
             transform: translateY(30px);
-            animation: slideUp 0.8s ease forwards 0.9s;
-        }
-
-        .btn {
-            padding: 16px 40px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background: var(--accent-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(244, 162, 97, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: var(--primary-color);
-            transform: translateY(-3px);
+            animation: fadeInUp 0.8s ease forwards 0.9s;
         }
 
         .hero-scroll {
@@ -350,10 +142,10 @@
         }
 
         .hero-scroll i {
-            font-size: 2rem;
+            font-size: var(--font-size-2xl);
         }
 
-        /* Mountain Wave Divider */
+        /* Mountain Divider */
         .mountain-divider {
             position: relative;
             height: 150px;
@@ -370,64 +162,33 @@
 
         /* Lessons Section */
         .lessons {
-            padding: 100px 50px;
-            background: var(--snow-white);
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-        }
-
-        .section-subtitle {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
+            padding: var(--spacing-6xl) var(--spacing-3xl);
+            background: var(--color-snow-white);
         }
 
         .filter-tabs {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 50px;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-3xl);
             flex-wrap: wrap;
         }
 
         .filter-tab {
-            padding: 12px 30px;
-            border: 2px solid #e5e7eb;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border: 2px solid var(--color-light-gray);
             background: white;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            font-weight: 500;
+            border-radius: var(--radius-3xl);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition-normal);
         }
 
         .filter-tab:hover,
         .filter-tab.active {
-            border-color: var(--primary-color);
-            background: var(--primary-color);
+            border-color: var(--color-primary);
+            background: var(--color-primary);
             color: white;
             transform: translateY(-2px);
         }
@@ -435,17 +196,17 @@
         .lessons-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            max-width: 1400px;
+            gap: var(--spacing-xl);
+            max-width: var(--container-2xl);
             margin: 0 auto;
         }
 
         .lesson-card {
             background: white;
-            border-radius: 20px;
+            border-radius: var(--radius-xl);
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-cubic);
             opacity: 0;
             transform: translateY(50px);
         }
@@ -457,7 +218,7 @@
 
         .lesson-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-xl);
         }
 
         .card-image {
@@ -479,118 +240,98 @@
 
         .card-badge {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background: var(--accent-color);
+            top: var(--spacing-md);
+            left: var(--spacing-md);
+            background: var(--color-accent);
             color: white;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            padding: 6px var(--spacing-md);
+            border-radius: var(--radius-xl);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
         }
 
-        .card-badge.beginner {
-            background: #22c55e;
-        }
-
-        .card-badge.intermediate {
-            background: var(--accent-color);
-        }
-
-        .card-badge.advanced {
-            background: #ef4444;
-        }
+        .card-badge.beginner { background: var(--color-success); }
+        .card-badge.intermediate { background: var(--color-accent); }
+        .card-badge.advanced { background: var(--color-danger); }
 
         .card-content {
-            padding: 25px;
+            padding: var(--spacing-xl);
         }
 
         .card-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 10px;
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-sm);
         }
 
         .card-desc {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            color: var(--color-text-light);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--spacing-lg);
         }
 
         .card-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 20px;
-            border-top: 1px solid #f0f0f0;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--color-light-gray);
         }
 
         .card-info {
             display: flex;
-            gap: 20px;
+            gap: var(--spacing-lg);
         }
 
         .card-info span {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 0.85rem;
-            color: var(--text-light);
+            gap: var(--spacing-xs);
+            font-size: var(--font-size-xs);
+            color: var(--color-text-light);
         }
 
         .card-info i {
-            color: var(--secondary-color);
+            color: var(--color-primary-light);
         }
 
         .card-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-color);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
         }
 
         .card-price small {
-            font-size: 0.8rem;
-            font-weight: 400;
-            color: var(--text-light);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-normal);
+            color: var(--color-text-light);
         }
 
         /* Features Section */
         .features {
-            padding: 100px 50px;
-            background: linear-gradient(180deg, #e8f4fc 0%, var(--snow-white) 100%);
+            padding: var(--spacing-6xl) var(--spacing-3xl);
+            background: linear-gradient(180deg, #e8f4fc 0%, var(--color-snow-white) 100%);
             position: relative;
             overflow: hidden;
-        }
-
-        .features-bg {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 300px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23d4e8f5' fill-opacity='0.5' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,234.7C960,224,1056,192,1152,181.3C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
-            background-size: cover;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            max-width: 1200px;
+            gap: var(--spacing-2xl);
+            max-width: var(--container-xl);
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         .feature-card {
             text-align: center;
-            padding: 40px 30px;
+            padding: var(--spacing-2xl) var(--spacing-xl);
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-            transition: all 0.4s ease;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-slow);
             opacity: 0;
             transform: translateY(30px) scale(0.95);
         }
@@ -602,87 +343,61 @@
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
         }
 
         .feature-icon {
             width: 100px;
             height: 100px;
-            margin: 0 auto 25px;
-            background: linear-gradient(135deg, var(--light-blue), var(--secondary-color));
-            border-radius: 50%;
+            margin: 0 auto var(--spacing-xl);
+            background: linear-gradient(135deg, var(--color-light-blue), var(--color-primary-light));
+            border-radius: var(--radius-circle);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             animation: float 3s ease-in-out infinite;
         }
 
-        .feature-card:nth-child(2) .feature-icon {
-            animation-delay: 0.5s;
-        }
-
-        .feature-card:nth-child(3) .feature-icon {
-            animation-delay: 1s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        .feature-card:nth-child(2) .feature-icon { animation-delay: 0.5s; }
+        .feature-card:nth-child(3) .feature-icon { animation-delay: 1s; }
 
         .feature-icon i {
-            font-size: 2.5rem;
+            font-size: var(--font-size-3xl);
             color: white;
         }
 
         .feature-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 15px;
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-md);
         }
 
         .feature-desc {
-            color: var(--text-light);
-            line-height: 1.7;
+            color: var(--color-text-light);
+            line-height: var(--line-height-relaxed);
         }
 
         .cta-button {
             text-align: center;
-            margin-top: 60px;
-            position: relative;
-            z-index: 1;
+            margin-top: var(--spacing-4xl);
         }
 
         /* Video Section */
         .video-section {
-            padding: 100px 50px;
-            background: var(--primary-color);
+            padding: var(--spacing-6xl) var(--spacing-3xl);
+            background: var(--color-primary);
             position: relative;
             overflow: hidden;
         }
 
-        .video-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-        }
-
         .video-content {
-            max-width: 1200px;
+            max-width: var(--container-xl);
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: var(--spacing-4xl);
             align-items: center;
-            position: relative;
-            z-index: 1;
         }
 
         .video-left {
@@ -692,14 +407,14 @@
         .video-play-btn {
             width: 80px;
             height: 80px;
-            background: var(--accent-color);
-            border-radius: 50%;
+            background: var(--color-accent);
+            border-radius: var(--radius-circle);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: var(--spacing-xl);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition-normal);
             position: relative;
         }
 
@@ -708,8 +423,8 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            background: var(--accent-color);
+            border-radius: var(--radius-circle);
+            background: var(--color-accent);
             animation: pulse-ring 1.5s ease-out infinite;
         }
 
@@ -720,11 +435,11 @@
 
         .video-play-btn:hover {
             transform: scale(1.1);
-            background: var(--accent-hover);
+            background: var(--color-accent-hover);
         }
 
         .video-play-btn i {
-            font-size: 2rem;
+            font-size: var(--font-size-2xl);
             color: white;
             margin-left: 5px;
             position: relative;
@@ -732,47 +447,41 @@
         }
 
         .video-title {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.3;
+            font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-3xl));
+            font-weight: var(--font-weight-extrabold);
+            margin-bottom: var(--spacing-lg);
+            line-height: var(--line-height-snug);
         }
 
         .video-desc {
-            font-size: 1rem;
+            font-size: var(--font-size-base);
             opacity: 0.9;
-            line-height: 1.8;
-            margin-bottom: 30px;
+            line-height: var(--line-height-loose);
+            margin-bottom: var(--spacing-xl);
         }
 
         .video-stats {
             display: flex;
-            gap: 40px;
+            gap: var(--spacing-2xl);
         }
 
-        .stat-item {
-            text-align: center;
-        }
+        .stat-item { text-align: center; }
 
         .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--accent-color);
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-extrabold);
+            color: var(--color-accent);
             display: block;
         }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: var(--font-size-sm);
             opacity: 0.8;
-        }
-
-        .video-right {
-            position: relative;
         }
 
         .video-frame {
             position: relative;
-            border-radius: 20px;
+            border-radius: var(--radius-xl);
             overflow: hidden;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
         }
@@ -782,374 +491,83 @@
             display: block;
         }
 
-        .video-frame-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .video-frame:hover .video-frame-overlay {
-            opacity: 1;
-        }
-
         /* Counter Section */
         .counter-section {
-            padding: 100px 50px;
-            background: linear-gradient(135deg, #f8fafc 0%, #e8f4fc 100%);
+            padding: var(--spacing-6xl) var(--spacing-3xl);
+            background: linear-gradient(135deg, var(--color-snow-white) 0%, #e8f4fc 100%);
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .counter-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(137, 196, 232, 0.2) 0%, transparent 60%);
-            animation: rotate 30s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .counter-content {
-            position: relative;
-            z-index: 1;
         }
 
         .counter-title {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            color: var(--text-dark);
-            margin-bottom: 20px;
+            font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-lg);
         }
 
         .counter-number {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(5rem, 15vw, 10rem);
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            font-family: var(--font-family-heading);
+            font-size: clamp(var(--font-size-5xl), 15vw, 10rem);
+            font-weight: var(--font-weight-black);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light), var(--color-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1;
-            margin-bottom: 20px;
+            margin-bottom: var(--spacing-lg);
         }
 
         .counter-label {
-            font-size: 1.2rem;
-            color: var(--text-light);
-        }
-
-        /* Instructors Section */
-        .instructors {
-            padding: 100px 50px;
-            background: white;
-        }
-
-        .instructors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .instructor-card {
-            text-align: center;
-            padding: 40px 30px;
-            background: var(--snow-white);
-            border-radius: 20px;
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .instructor-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .instructor-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-        }
-
-        .instructor-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto 25px;
-            border: 5px solid white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .instructor-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .instructor-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 5px;
-        }
-
-        .instructor-role {
-            color: var(--accent-color);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .instructor-desc {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: var(--font-size-lg);
+            color: var(--color-text-light);
         }
 
         /* CTA Section */
         .cta-section {
-            padding: 100px 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            background-position: bottom;
+            padding: var(--spacing-6xl) var(--spacing-3xl);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            text-align: center;
+            color: white;
         }
 
         .cta-content {
             max-width: 800px;
             margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            color: white;
         }
 
         .cta-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            margin-bottom: 20px;
+            font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+            font-weight: var(--font-weight-extrabold);
+            margin-bottom: var(--spacing-lg);
         }
 
         .cta-desc {
-            font-size: 1.1rem;
+            font-size: var(--font-size-md);
             opacity: 0.9;
-            margin-bottom: 40px;
-            line-height: 1.8;
+            margin-bottom: var(--spacing-2xl);
+            line-height: var(--line-height-loose);
         }
 
         .cta-buttons {
             display: flex;
-            gap: 20px;
+            gap: var(--spacing-lg);
             justify-content: center;
             flex-wrap: wrap;
         }
 
-        .btn-white {
-            background: white;
-            color: var(--primary-color);
-        }
-
-        .btn-white:hover {
-            background: var(--snow-white);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Footer */
-        .footer {
-            background: #0f172a;
-            color: white;
-            padding: 80px 50px 30px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            margin-bottom: 50px;
-        }
-
-        .footer-brand .logo {
-            margin-bottom: 20px;
-        }
-
-        .footer-brand p {
-            color: #94a3b8;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--accent-color);
-            transform: translateY(-3px);
-        }
-
-        .footer-column h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            color: white;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-column ul a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-column ul a:hover {
-            color: var(--accent-color);
-            transform: translateX(5px);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .footer-bottom p {
-            color: #64748b;
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .footer-links a {
-            color: #64748b;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        /* Mobile Navigation */
-        @media (max-width: 992px) {
-            .menu-toggle {
-                display: flex;
-            }
-
-            .nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                max-width: 400px;
-                height: 100vh;
-                background: var(--primary-color);
-                flex-direction: column;
-                justify-content: center;
-                gap: 30px;
-                padding: 50px;
-                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-
-            .nav.active {
-                right: 0;
-            }
-
-            .nav a {
-                font-size: 1.3rem;
-            }
-
-            .header {
-                padding: 15px 25px;
-            }
-
-            .header.scrolled {
-                padding: 10px 25px;
-            }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
             .hero-content {
-                padding: 0 25px;
+                padding: 0 var(--spacing-xl);
                 text-align: center;
             }
 
             .hero-desc {
-                margin: 0 auto 40px;
+                margin: 0 auto var(--spacing-2xl);
             }
 
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
-            }
-
-            .lessons,
-            .features,
-            .video-section,
-            .counter-section,
-            .instructors,
-            .cta-section {
-                padding: 60px 25px;
             }
 
             .lessons-grid {
@@ -1166,159 +584,35 @@
             }
 
             .video-play-btn {
-                margin: 0 auto 30px;
+                margin: 0 auto var(--spacing-xl);
             }
 
             .video-stats {
                 justify-content: center;
             }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-
-            .footer-column ul a {
-                justify-content: center;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-        /* Animations on scroll */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.6s ease;
-        }
-
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.6s ease;
-        }
-
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Loading Animation */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-color);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        .loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loader-content {
-            text-align: center;
-            color: white;
-        }
-
-        .loader-ski {
-            width: 100px;
-            height: 100px;
-            position: relative;
-            margin: 0 auto 20px;
-            animation: skiMove 1.5s ease-in-out infinite;
-        }
-
-        @keyframes skiMove {
-            0%, 100% { transform: translateX(-20px) rotate(-5deg); }
-            50% { transform: translateX(20px) rotate(5deg); }
-        }
-
-        .loader-ski::before,
-        .loader-ski::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 80px;
-            background: white;
-            border-radius: 4px;
-        }
-
-        .loader-ski::before {
-            left: 30%;
-            transform: rotate(-10deg);
-        }
-
-        .loader-ski::after {
-            right: 30%;
-            transform: rotate(10deg);
-        }
-
-        .loader-text {
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
     <!-- Loader -->
     <div class="loader" id="loader">
-        <div class="loader-content">
-            <div class="loader-ski"></div>
-            <p class="loader-text">LOADING...</p>
-        </div>
+        <div class="loader-spinner"></div>
     </div>
 
     <!-- Header -->
     <header class="header" id="header">
-        <a href="#" class="logo">
+        <a href="index.html" class="logo">
             <div class="logo-icon"></div>
             SKI LESSON
         </a>
         <nav class="nav" id="nav">
             <a href="products.html">강습 상품</a>
             <a href="gallery.html">강습 갤러리</a>
-            <a href="#book" class="nav-btn">예약하기</a>
-            <a href="#reviews">후기</a>
-            <a href="#rental">직영 렌탈샵</a>
-            <a href="#faq">자주묻는질문</a>
-            <a href="#notice">공지</a>
+            <a href="booking.html" class="nav-btn">예약하기</a>
+            <a href="reviews.html">후기</a>
+            <a href="rental.html">직영 렌탈샵</a>
+            <a href="faq.html">자주묻는질문</a>
+            <a href="notice.html">공지</a>
         </nav>
         <div class="menu-toggle" id="menuToggle">
             <span></span>
@@ -1344,11 +638,11 @@
                 완벽한 프로그램을 제공합니다.
             </p>
             <div class="hero-buttons">
-                <a href="#lessons" class="btn btn-primary">
+                <a href="products.html" class="btn btn-primary">
                     <i class="fas fa-play"></i> 강습 시작하기
                 </a>
-                <a href="#features" class="btn btn-secondary">
-                    <i class="fas fa-info-circle"></i> 더 알아보기
+                <a href="booking.html" class="btn btn-secondary">
+                    <i class="fas fa-calendar-check"></i> 예약하기
                 </a>
             </div>
         </div>
@@ -1378,7 +672,6 @@
             <button class="filter-tab" data-filter="beginner">초급</button>
             <button class="filter-tab" data-filter="intermediate">중급</button>
             <button class="filter-tab" data-filter="advanced">상급</button>
-            <button class="filter-tab" data-filter="private">프라이빗</button>
         </div>
 
         <div class="lessons-grid">
@@ -1435,66 +728,11 @@
                     </div>
                 </div>
             </div>
-
-            <div class="lesson-card" data-category="private">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600" alt="프라이빗 스키 강습">
-                    <span class="card-badge intermediate">프라이빗</span>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">1:1 맞춤형 레슨</h3>
-                    <p class="card-desc">개인의 수준과 목표에 맞춘 완벽한 프라이빗 레슨 프로그램입니다.</p>
-                    <div class="card-meta">
-                        <div class="card-info">
-                            <span><i class="far fa-clock"></i> 2시간</span>
-                            <span><i class="far fa-user"></i> 1명</span>
-                        </div>
-                        <div class="card-price">₩350,000 <small>/인</small></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-card" data-category="beginner">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1609140445127-e0c01f2b4ed2?w=600" alt="키즈 스키 강습">
-                    <span class="card-badge beginner">초급</span>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">키즈 스키 스쿨</h3>
-                    <p class="card-desc">어린이 전문 강사진과 함께하는 안전하고 재미있는 스키 입문 과정입니다.</p>
-                    <div class="card-meta">
-                        <div class="card-info">
-                            <span><i class="far fa-clock"></i> 2시간</span>
-                            <span><i class="far fa-user"></i> 1-6명</span>
-                        </div>
-                        <div class="card-price">₩120,000 <small>/인</small></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-card" data-category="intermediate">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1520820984457-6be944a2d20e?w=600" alt="그룹 스키 강습">
-                    <span class="card-badge intermediate">중급</span>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">그룹 스킬업 클래스</h3>
-                    <p class="card-desc">같은 레벨의 수강생들과 함께 실력을 향상시키는 그룹 레슨입니다.</p>
-                    <div class="card-meta">
-                        <div class="card-info">
-                            <span><i class="far fa-clock"></i> 3시간</span>
-                            <span><i class="far fa-user"></i> 4-8명</span>
-                        </div>
-                        <div class="card-price">₩100,000 <small>/인</small></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Features Section -->
     <section class="features" id="features">
-        <div class="features-bg"></div>
         <div class="section-header fade-in">
             <span class="section-tag">WHY US</span>
             <h2 class="section-title">왜 SKI LESSON인가요?</h2>
@@ -1528,7 +766,7 @@
         </div>
 
         <div class="cta-button fade-in">
-            <a href="#contact" class="btn btn-primary">
+            <a href="booking.html" class="btn btn-primary">
                 <i class="fas fa-calendar-check"></i> 무료 상담 신청하기
             </a>
         </div>
@@ -1545,34 +783,25 @@
                 <p class="video-desc">
                     10년 이상의 강습 경험과 노하우로 만들어진 체계적인 커리큘럼.
                     초보자도 단 하루 만에 슬로프를 내려올 수 있습니다.
-                    지금 바로 스키의 짜릿한 매력에 빠져보세요!
                 </p>
                 <div class="video-stats">
                     <div class="stat-item">
                         <span class="stat-number" data-target="98">0</span>
-                        <span class="stat-label">%</span>
-                        <p class="stat-label">수강생 만족도</p>
+                        <p class="stat-label">% 만족도</p>
                     </div>
                     <div class="stat-item">
                         <span class="stat-number" data-target="500">0</span>
-                        <span class="stat-label">+</span>
-                        <p class="stat-label">월간 수강생</p>
+                        <p class="stat-label">+ 월간 수강생</p>
                     </div>
                     <div class="stat-item">
                         <span class="stat-number" data-target="15">0</span>
-                        <span class="stat-label">년</span>
-                        <p class="stat-label">강습 경력</p>
+                        <p class="stat-label">년 경력</p>
                     </div>
                 </div>
             </div>
             <div class="video-right slide-in-right">
                 <div class="video-frame">
                     <img src="https://images.unsplash.com/photo-1551524559-8af4e6624178?w=800" alt="스키 강습 영상">
-                    <div class="video-frame-overlay">
-                        <div class="video-play-btn">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1587,55 +816,8 @@
         </div>
     </section>
 
-    <!-- Instructors Section -->
-    <section class="instructors" id="instructors">
-        <div class="section-header fade-in">
-            <span class="section-tag">INSTRUCTORS</span>
-            <h2 class="section-title">전문 강사진 소개</h2>
-            <p class="section-subtitle">최고의 실력과 열정을 가진 강사진을 만나보세요</p>
-        </div>
-
-        <div class="instructors-grid">
-            <div class="instructor-card">
-                <div class="instructor-image">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300" alt="김민수 강사">
-                </div>
-                <h3 class="instructor-name">김민수</h3>
-                <p class="instructor-role">수석 강사 | KSIA Level 3</p>
-                <p class="instructor-desc">15년 경력의 베테랑 강사로 국가대표 출신. 초급부터 상급까지 모든 레벨의 강습이 가능합니다.</p>
-            </div>
-
-            <div class="instructor-card">
-                <div class="instructor-image">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300" alt="이수진 강사">
-                </div>
-                <h3 class="instructor-name">이수진</h3>
-                <p class="instructor-role">키즈 전문 강사 | CSIA Level 2</p>
-                <p class="instructor-desc">어린이 스키 교육 전문가. 재미있고 안전한 강습으로 아이들에게 스키의 즐거움을 선사합니다.</p>
-            </div>
-
-            <div class="instructor-card">
-                <div class="instructor-image">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300" alt="박준영 강사">
-                </div>
-                <h3 class="instructor-name">박준영</h3>
-                <p class="instructor-role">테크니컬 강사 | KSIA Level 2</p>
-                <p class="instructor-desc">카빙 기술 전문가. 정확한 자세 교정과 기술 분석으로 빠른 실력 향상을 도와드립니다.</p>
-            </div>
-
-            <div class="instructor-card">
-                <div class="instructor-image">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300" alt="최예은 강사">
-                </div>
-                <h3 class="instructor-name">최예은</h3>
-                <p class="instructor-role">프리스타일 강사 | PSAA 자격</p>
-                <p class="instructor-desc">프리스타일 스키 전문. 점프, 트릭 등 익스트림 기술을 안전하게 배울 수 있습니다.</p>
-            </div>
-        </div>
-    </section>
-
     <!-- CTA Section -->
-    <section class="cta-section" id="contact">
+    <section class="cta-section">
         <div class="cta-content fade-in">
             <h2 class="cta-title">지금 바로 스키 강습을 시작하세요!</h2>
             <p class="cta-desc">
@@ -1646,7 +828,7 @@
                 <a href="tel:02-1234-5678" class="btn btn-white">
                     <i class="fas fa-phone"></i> 전화 상담
                 </a>
-                <a href="#book" class="btn btn-primary">
+                <a href="booking.html" class="btn btn-primary">
                     <i class="fas fa-calendar-alt"></i> 온라인 예약
                 </a>
             </div>
@@ -1657,7 +839,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <a href="#" class="logo">
+                <a href="index.html" class="logo">
                     <div class="logo-icon"></div>
                     SKI LESSON
                 </a>
@@ -1672,40 +854,32 @@
             <div class="footer-column">
                 <h4>강습 프로그램</h4>
                 <ul>
-                    <li><a href="#">초급 강습</a></li>
-                    <li><a href="#">중급 강습</a></li>
-                    <li><a href="#">상급 강습</a></li>
-                    <li><a href="#">프라이빗 레슨</a></li>
-                    <li><a href="#">키즈 프로그램</a></li>
+                    <li><a href="products.html">프리미엄 강습</a></li>
+                    <li><a href="products.html">시즌 강습</a></li>
+                    <li><a href="products.html">알파인 강습</a></li>
+                    <li><a href="products.html">키즈 프로그램</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h4>고객 지원</h4>
                 <ul>
-                    <li><a href="#">자주 묻는 질문</a></li>
-                    <li><a href="#">예약 안내</a></li>
-                    <li><a href="#">취소/환불 정책</a></li>
-                    <li><a href="#">안전 수칙</a></li>
-                    <li><a href="#">오시는 길</a></li>
+                    <li><a href="faq.html">자주 묻는 질문</a></li>
+                    <li><a href="booking.html">예약 안내</a></li>
+                    <li><a href="notice.html">공지사항</a></li>
+                    <li><a href="rental.html">렌탈샵</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h4>연락처</h4>
                 <ul>
-                    <li><a href="tel:02-1234-5678"><i class="fas fa-phone"></i> 02-1234-5678</a></li>
-                    <li><a href="mailto:info@skilesson.kr"><i class="fas fa-envelope"></i> info@skilesson.kr</a></li>
-                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> 강원도 평창군 대관령면</a></li>
-                    <li><a href="#"><i class="far fa-clock"></i> 매일 08:00 - 18:00</a></li>
+                    <li><i class="fas fa-phone"></i> 02-1234-5678</li>
+                    <li><i class="fas fa-envelope"></i> info@skilesson.kr</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 강원도 평창군</li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2025 SKI LESSON. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">이용약관</a>
-                <a href="#">개인정보처리방침</a>
-                <a href="#">사업자정보</a>
-            </div>
         </div>
     </footer>
 
@@ -1714,15 +888,13 @@
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hidden');
-            }, 1500);
+            }, 800);
         });
 
         // Snow Effect
         function createSnowflakes() {
             const container = document.getElementById('snowContainer');
-            const snowflakeCount = 50;
-
-            for (let i = 0; i < snowflakeCount; i++) {
+            for (let i = 0; i < 50; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
                 snowflake.innerHTML = '❄';
@@ -1737,78 +909,50 @@
         createSnowflakes();
 
         // Header Scroll Effect
-        const header = document.getElementById('header');
-        let lastScroll = 0;
-
         window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll > 50) {
+            const header = document.getElementById('header');
+            if (window.pageYOffset > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
-
-            lastScroll = currentScroll;
         });
 
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const nav = document.getElementById('nav');
-
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
-
-        // Close menu on link click
+        menuToggle.addEventListener('click', () => nav.classList.toggle('active'));
         document.querySelectorAll('.nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                menuToggle.classList.remove('active');
-            });
+            link.addEventListener('click', () => nav.classList.remove('active'));
         });
 
         // Scroll Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
+                    setTimeout(() => entry.target.classList.add('visible'), index * 100);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        // Observe elements
-        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .lesson-card, .feature-card, .instructor-card').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .lesson-card, .feature-card').forEach(el => observer.observe(el));
 
         // Counter Animation
         function animateCounter(element, target, duration = 2000) {
             let start = 0;
             const increment = target / (duration / 16);
-
-            function updateCounter() {
+            function update() {
                 start += increment;
                 if (start < target) {
                     element.textContent = Math.floor(start).toLocaleString();
-                    requestAnimationFrame(updateCounter);
+                    requestAnimationFrame(update);
                 } else {
                     element.textContent = target.toLocaleString();
                 }
             }
-
-            updateCounter();
+            update();
         }
 
-        // Main Counter Observer
         const mainCounter = document.getElementById('mainCounter');
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1818,125 +962,35 @@
                 }
             });
         }, { threshold: 0.5 });
-
         counterObserver.observe(mainCounter);
 
-        // Stats Counter Animation
         document.querySelectorAll('.stat-number[data-target]').forEach(stat => {
-            const statObserver = new IntersectionObserver((entries) => {
+            const obs = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const target = parseInt(entry.target.dataset.target);
-                        animateCounter(entry.target, target, 2000);
-                        statObserver.unobserve(entry.target);
+                        animateCounter(entry.target, parseInt(entry.target.dataset.target), 2000);
+                        obs.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.5 });
-
-            statObserver.observe(stat);
+            obs.observe(stat);
         });
 
         // Filter Tabs
-        const filterTabs = document.querySelectorAll('.filter-tab');
-        const lessonCards = document.querySelectorAll('.lesson-card');
-
-        filterTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs
-                filterTabs.forEach(t => t.classList.remove('active'));
-                // Add active class to clicked tab
-                tab.classList.add('active');
-
-                const filter = tab.dataset.filter;
-
-                lessonCards.forEach((card, index) => {
-                    const category = card.dataset.category;
-
-                    if (filter === 'all' || category === filter) {
-                        setTimeout(() => {
-                            card.style.display = 'block';
-                            card.style.opacity = '0';
-                            card.style.transform = 'translateY(20px)';
-                            setTimeout(() => {
-                                card.style.opacity = '1';
-                                card.style.transform = 'translateY(0)';
-                            }, 50);
-                        }, index * 50);
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const filter = this.dataset.filter;
+                document.querySelectorAll('.lesson-card').forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
                     } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
+                        card.style.display = 'none';
                     }
                 });
             });
         });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Parallax effect for hero
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero-bg');
-            if (hero && scrolled < window.innerHeight) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px) scale(${1 + scrolled * 0.0002})`;
-            }
-        });
-
-        // Add ripple effect to buttons
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    background: rgba(255,255,255,0.3);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple 0.6s ease-out;
-                    pointer-events: none;
-                `;
-
-                this.style.position = 'relative';
-                this.style.overflow = 'hidden';
-                this.appendChild(ripple);
-
-                setTimeout(() => ripple.remove(), 600);
-            });
-        });
-
-        // Add CSS for ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

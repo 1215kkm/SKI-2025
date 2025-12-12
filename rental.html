@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>직영 렌탈샵 - SKI LESSON</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .rental-section {
+            padding: var(--spacing-6xl) var(--spacing-3xl);
+            background: var(--color-snow-white);
+        }
+
+        .rental-grid {
+            max-width: var(--container-xl);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .rental-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-cubic);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .rental-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .rental-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .rental-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .rental-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .rental-card:hover .rental-image img {
+            transform: scale(1.1);
+        }
+
+        .rental-badge {
+            position: absolute;
+            top: var(--spacing-md);
+            left: var(--spacing-md);
+            background: var(--color-accent);
+            color: white;
+            padding: 4px var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .rental-content {
+            padding: var(--spacing-xl);
+        }
+
+        .rental-category {
+            font-size: var(--font-size-sm);
+            color: var(--color-primary);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .rental-title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .rental-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .rental-feature {
+            background: var(--color-snow-white);
+            padding: 4px var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            color: var(--color-text-light);
+        }
+
+        .rental-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--color-light-gray);
+        }
+
+        .price-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-light);
+        }
+
+        .price-value {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+        }
+
+        .price-unit {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-normal);
+            color: var(--color-text-light);
+        }
+
+        .rental-btn {
+            padding: var(--spacing-md) var(--spacing-lg);
+        }
+
+        /* Info Section */
+        .rental-info {
+            max-width: var(--container-xl);
+            margin: var(--spacing-4xl) auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-xl);
+        }
+
+        .info-card {
+            background: white;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .info-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--color-light-blue), var(--color-primary-light));
+            border-radius: var(--radius-circle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-lg);
+        }
+
+        .info-icon i {
+            font-size: var(--font-size-2xl);
+            color: white;
+        }
+
+        .info-title {
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-dark);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .info-desc {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-light);
+            line-height: var(--line-height-relaxed);
+        }
+
+        /* Package Section */
+        .package-section {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            padding: var(--spacing-5xl) var(--spacing-3xl);
+            margin-top: var(--spacing-4xl);
+        }
+
+        .package-container {
+            max-width: var(--container-xl);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-3xl);
+            align-items: center;
+        }
+
+        .package-content {
+            color: white;
+        }
+
+        .package-content h2 {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-extrabold);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .package-content p {
+            font-size: var(--font-size-md);
+            opacity: 0.9;
+            margin-bottom: var(--spacing-xl);
+            line-height: var(--line-height-relaxed);
+        }
+
+        .package-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .package-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .package-feature i {
+            color: var(--color-accent);
+        }
+
+        .package-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            text-align: center;
+        }
+
+        .package-price-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .package-price {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-black);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .package-original {
+            text-decoration: line-through;
+            color: var(--color-text-muted);
+            font-size: var(--font-size-lg);
+        }
+
+        .package-includes {
+            text-align: left;
+            margin: var(--spacing-xl) 0;
+        }
+
+        .package-includes li {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--color-light-gray);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-body);
+        }
+
+        .package-includes li:last-child {
+            border-bottom: none;
+        }
+
+        .package-includes i {
+            color: var(--color-success);
+        }
+
+        @media (max-width: 992px) {
+            .rental-info {
+                grid-template-columns: 1fr;
+            }
+
+            .package-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .package-features {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader"><div class="loader-spinner"></div></div>
+
+    <header class="header solid">
+        <a href="index.html" class="logo"><div class="logo-icon"></div>SKI LESSON</a>
+        <nav class="nav" id="nav">
+            <a href="products.html">강습 상품</a>
+            <a href="gallery.html">강습 갤러리</a>
+            <a href="booking.html" class="nav-btn">예약하기</a>
+            <a href="reviews.html">후기</a>
+            <a href="rental.html" class="active">직영 렌탈샵</a>
+            <a href="faq.html">자주묻는질문</a>
+            <a href="notice.html">공지</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    </header>
+
+    <section class="page-header">
+        <div class="page-header-content">
+            <span class="page-tag"><i class="fas fa-skiing"></i> RENTAL</span>
+            <h1 class="page-title">직영 렌탈샵</h1>
+            <p class="page-subtitle">최신 장비를 합리적인 가격에 대여하세요</p>
+        </div>
+    </section>
+
+    <section class="rental-section">
+        <div class="section-header fade-in">
+            <span class="section-tag">EQUIPMENT</span>
+            <h2 class="section-title">렌탈 장비</h2>
+            <p class="section-subtitle">초보자부터 상급자까지 모든 레벨에 맞는 장비를 제공합니다</p>
+        </div>
+
+        <div class="rental-grid">
+            <div class="rental-card">
+                <div class="rental-image">
+                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600" alt="스키 세트">
+                    <span class="rental-badge">인기</span>
+                </div>
+                <div class="rental-content">
+                    <div class="rental-category">스키</div>
+                    <h3 class="rental-title">스키 풀세트</h3>
+                    <div class="rental-features">
+                        <span class="rental-feature">스키판</span>
+                        <span class="rental-feature">부츠</span>
+                        <span class="rental-feature">폴</span>
+                    </div>
+                    <div class="rental-price">
+                        <div class="price-info">
+                            <span class="price-label">1일 대여</span>
+                            <span class="price-value">₩40,000 <span class="price-unit">/ 일</span></span>
+                        </div>
+                        <button class="btn btn-primary btn-sm rental-btn">대여하기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rental-card">
+                <div class="rental-image">
+                    <img src="https://images.unsplash.com/photo-1605540436563-5bca919ae766?w=600" alt="스노보드 세트">
+                </div>
+                <div class="rental-content">
+                    <div class="rental-category">스노보드</div>
+                    <h3 class="rental-title">스노보드 풀세트</h3>
+                    <div class="rental-features">
+                        <span class="rental-feature">보드</span>
+                        <span class="rental-feature">부츠</span>
+                        <span class="rental-feature">바인딩</span>
+                    </div>
+                    <div class="rental-price">
+                        <div class="price-info">
+                            <span class="price-label">1일 대여</span>
+                            <span class="price-value">₩45,000 <span class="price-unit">/ 일</span></span>
+                        </div>
+                        <button class="btn btn-primary btn-sm rental-btn">대여하기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rental-card">
+                <div class="rental-image">
+                    <img src="https://images.unsplash.com/photo-1551524559-8af4e6624178?w=600" alt="스키복">
+                    <span class="rental-badge">NEW</span>
+                </div>
+                <div class="rental-content">
+                    <div class="rental-category">의류</div>
+                    <h3 class="rental-title">스키복 세트</h3>
+                    <div class="rental-features">
+                        <span class="rental-feature">재킷</span>
+                        <span class="rental-feature">팬츠</span>
+                        <span class="rental-feature">장갑</span>
+                    </div>
+                    <div class="rental-price">
+                        <div class="price-info">
+                            <span class="price-label">1일 대여</span>
+                            <span class="price-value">₩35,000 <span class="price-unit">/ 일</span></span>
+                        </div>
+                        <button class="btn btn-primary btn-sm rental-btn">대여하기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rental-card">
+                <div class="rental-image">
+                    <img src="https://images.unsplash.com/photo-1565992441121-4367c2967103?w=600" alt="헬멧+고글">
+                </div>
+                <div class="rental-content">
+                    <div class="rental-category">안전장비</div>
+                    <h3 class="rental-title">헬멧 + 고글 세트</h3>
+                    <div class="rental-features">
+                        <span class="rental-feature">헬멧</span>
+                        <span class="rental-feature">고글</span>
+                        <span class="rental-feature">넥워머</span>
+                    </div>
+                    <div class="rental-price">
+                        <div class="price-info">
+                            <span class="price-label">1일 대여</span>
+                            <span class="price-value">₩15,000 <span class="price-unit">/ 일</span></span>
+                        </div>
+                        <button class="btn btn-primary btn-sm rental-btn">대여하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rental-info">
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-tools"></i></div>
+                <h3 class="info-title">최신 장비</h3>
+                <p class="info-desc">매 시즌 최신 장비로 교체하여 최상의 컨디션을 유지합니다.</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-spray-can"></i></div>
+                <h3 class="info-title">철저한 소독</h3>
+                <p class="info-desc">매 대여 후 전문 장비로 세척 및 소독을 진행합니다.</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-headset"></i></div>
+                <h3 class="info-title">전문 상담</h3>
+                <p class="info-desc">전문 스태프가 체형과 레벨에 맞는 장비를 추천해드립니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="package-section">
+        <div class="package-container">
+            <div class="package-content">
+                <h2>강습 + 렌탈 패키지</h2>
+                <p>강습과 장비 대여를 함께 예약하시면 특별 할인 혜택을 드립니다.</p>
+                <div class="package-features">
+                    <div class="package-feature"><i class="fas fa-check"></i> 최대 30% 할인</div>
+                    <div class="package-feature"><i class="fas fa-check"></i> 우선 장비 배정</div>
+                    <div class="package-feature"><i class="fas fa-check"></i> 무료 락커 이용</div>
+                    <div class="package-feature"><i class="fas fa-check"></i> 간식 제공</div>
+                </div>
+                <a href="booking.html" class="btn btn-white"><i class="fas fa-calendar-check"></i> 패키지 예약하기</a>
+            </div>
+            <div class="package-card">
+                <div class="package-price-label">프리미엄 패키지</div>
+                <div class="package-original">₩290,000</div>
+                <div class="package-price">₩199,000</div>
+                <ul class="package-includes">
+                    <li><i class="fas fa-check-circle"></i> 프리미엄 1:1 강습 2시간</li>
+                    <li><i class="fas fa-check-circle"></i> 스키/보드 풀세트 대여</li>
+                    <li><i class="fas fa-check-circle"></i> 스키복 세트 대여</li>
+                    <li><i class="fas fa-check-circle"></i> 헬멧+고글 세트</li>
+                    <li><i class="fas fa-check-circle"></i> 락커 무료 이용</li>
+                </ul>
+                <a href="booking.html" class="btn btn-primary" style="width:100%">패키지 예약</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo"><div class="logo-icon"></div>SKI LESSON</a>
+                <p>전문 강사진과 함께하는 최고의 스키 강습 서비스.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-column"><h4>강습 프로그램</h4><ul><li><a href="products.html">프리미엄 강습</a></li><li><a href="products.html">시즌 강습</a></li></ul></div>
+            <div class="footer-column"><h4>고객 지원</h4><ul><li><a href="faq.html">자주 묻는 질문</a></li><li><a href="notice.html">공지사항</a></li></ul></div>
+            <div class="footer-column"><h4>연락처</h4><ul><li><i class="fas fa-phone"></i> 02-1234-5678</li><li><i class="fas fa-envelope"></i> info@skilesson.kr</li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 SKI LESSON. All rights reserved.</p></div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('hidden'), 500));
+        document.getElementById('menuToggle').addEventListener('click', () => document.getElementById('nav').classList.toggle('active'));
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 100);
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.rental-card, .fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
