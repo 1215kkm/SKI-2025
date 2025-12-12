@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강습 갤러리 - SKI LESSON</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a3a5c;
+            --secondary-color: #2d5a87;
+            --accent-color: #f4a261;
+            --accent-hover: #e76f51;
+            --light-blue: #89c4e8;
+            --snow-white: #f8fafc;
+            --text-dark: #1a1a2e;
+            --text-light: #6b7280;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow-x: hidden;
+            background: var(--snow-white);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 58, 92, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        .logo-icon::before,
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 2px;
+        }
+
+        .logo-icon::before {
+            width: 4px;
+            height: 40px;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-15deg);
+        }
+
+        .logo-icon::after {
+            width: 4px;
+            height: 40px;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%) rotate(15deg);
+        }
+
+        .nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav a.active {
+            color: var(--accent-color);
+        }
+
+        .nav a.active::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            background: var(--accent-color);
+            color: white !important;
+            padding: 12px 25px !important;
+            border-radius: 30px;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(244, 162, 97, 0.4);
+        }
+
+        .nav-btn::after {
+            display: none !important;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 180px 50px 100px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .floating-snow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .snow-flake {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8);
+            animation: snowFall linear infinite;
+            top: -20px;
+        }
+
+        @keyframes snowFall {
+            0% {
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(calc(100vh + 20px)) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 100px 50px;
+            background: var(--snow-white);
+        }
+
+        /* Filter Tabs */
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 12px 30px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(26, 58, 92, 0.3);
+        }
+
+        /* Gallery Grid - Masonry Style */
+        .gallery-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 10px;
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .gallery-item.small {
+            grid-row: span 25;
+        }
+
+        .gallery-item.medium {
+            grid-row: span 30;
+        }
+
+        .gallery-item.large {
+            grid-row: span 35;
+        }
+
+        .gallery-item.tall {
+            grid-row: span 45;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(26, 58, 92, 0.9) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            color: white;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-info {
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-info {
+            transform: translateY(0);
+        }
+
+        .gallery-category {
+            display: inline-block;
+            background: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .gallery-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .gallery-date {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .gallery-zoom {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-zoom {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Stats Banner */
+        .stats-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 60px 50px;
+            margin-top: 80px;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .stat-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .lightbox-prev {
+            left: -70px;
+        }
+
+        .lightbox-next {
+            right: -70px;
+        }
+
+        .lightbox-caption {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .lightbox-caption h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .lightbox-caption p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 50px;
+            background: var(--snow-white);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .cta-desc {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(244, 162, 97, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 60px 50px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column ul a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                max-width: 400px;
+                height: 100vh;
+                background: var(--primary-color);
+                flex-direction: column;
+                justify-content: center;
+                gap: 30px;
+                padding: 50px;
+                transition: right 0.4s ease;
+            }
+
+            .nav.active {
+                right: 0;
+            }
+
+            .header {
+                padding: 15px 25px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header,
+            .gallery-section,
+            .stats-banner,
+            .cta-section,
+            .footer {
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item.small,
+            .gallery-item.medium,
+            .gallery-item.large,
+            .gallery-item.tall {
+                grid-row: span 30;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .lightbox-nav {
+                display: none;
+            }
+
+            .cta-section .btn {
+                display: block;
+                margin: 10px auto;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Image Loading Animation */
+        .gallery-item img {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .gallery-item img.loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"></div>
+            SKI LESSON
+        </a>
+        <nav class="nav" id="nav">
+            <a href="products.html">강습 상품</a>
+            <a href="gallery.html" class="active">강습 갤러리</a>
+            <a href="#book" class="nav-btn">예약하기</a>
+            <a href="index.html#reviews">후기</a>
+            <a href="index.html#rental">직영 렌탈샵</a>
+            <a href="index.html#faq">자주묻는질문</a>
+            <a href="index.html#notice">공지</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="floating-snow" id="floatingSnow"></div>
+        <div class="page-header-content">
+            <span class="page-tag"><i class="fas fa-images"></i> GALLERY</span>
+            <h1 class="page-title">강습 갤러리</h1>
+            <p class="page-subtitle">SKI LESSON과 함께한 수강생들의 특별한 순간들을 만나보세요</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="filter-container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">전체</button>
+                <button class="filter-tab" data-filter="beginner">초급반</button>
+                <button class="filter-tab" data-filter="intermediate">중급반</button>
+                <button class="filter-tab" data-filter="advanced">상급반</button>
+                <button class="filter-tab" data-filter="kids">키즈반</button>
+                <button class="filter-tab" data-filter="alpine">알파인</button>
+            </div>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Gallery items will be generated by JavaScript -->
+        </div>
+
+        <!-- Stats Banner -->
+        <div class="stats-banner">
+            <div class="stats-container">
+                <div class="stat-item" data-animate>
+                    <div class="stat-number" data-target="15847">0</div>
+                    <div class="stat-label">누적 수강생</div>
+                </div>
+                <div class="stat-item" data-animate>
+                    <div class="stat-number" data-target="2580">0</div>
+                    <div class="stat-label">갤러리 사진</div>
+                </div>
+                <div class="stat-item" data-animate>
+                    <div class="stat-number" data-target="98">0</div>
+                    <div class="stat-label">% 만족도</div>
+                </div>
+                <div class="stat-item" data-animate>
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">년 경력</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">나만의 스키 추억을 만들어보세요!</h2>
+            <p class="cta-desc">지금 강습을 신청하시면 전문 포토그래퍼의 촬영 서비스가 무료로 제공됩니다.</p>
+            <div>
+                <a href="products.html" class="btn btn-primary">
+                    <i class="fas fa-skiing"></i> 강습 신청하기
+                </a>
+                <a href="tel:02-1234-5678" class="btn btn-outline">
+                    <i class="fas fa-phone"></i> 전화 상담
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"></div>
+                    SKI LESSON
+                </a>
+                <p>전문 강사진과 함께하는 최고의 스키 강습 서비스. 초보자부터 전문가까지 모든 레벨을 위한 맞춤형 프로그램을 제공합니다.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fas fa-blog"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>강습 프로그램</h4>
+                <ul>
+                    <li><a href="products.html">프리미엄 강습</a></li>
+                    <li><a href="products.html">시즌 강습</a></li>
+                    <li><a href="products.html">알파인 강습</a></li>
+                    <li><a href="products.html">알파인 시즌 강습</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>고객 지원</h4>
+                <ul>
+                    <li><a href="#">자주 묻는 질문</a></li>
+                    <li><a href="#">예약 안내</a></li>
+                    <li><a href="#">취소/환불 정책</a></li>
+                    <li><a href="#">오시는 길</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>연락처</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> 02-1234-5678</li>
+                    <li><i class="fas fa-envelope"></i> info@skilesson.kr</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 강원도 평창군</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SKI LESSON. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">&times;</button>
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+            <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+            <img src="" alt="" id="lightboxImg">
+            <div class="lightbox-caption">
+                <h3 id="lightboxTitle"></h3>
+                <p id="lightboxDate"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gallery Data
+        const galleryData = [
+            { id: 1, src: 'https://images.unsplash.com/photo-1551524559-8af4e6624178?w=800', category: 'beginner', title: '첫 스키 도전', date: '2025.01.15', size: 'large' },
+            { id: 2, src: 'https://images.unsplash.com/photo-1565992441121-4367c2967103?w=800', category: 'intermediate', title: '카빙턴 연습중', date: '2025.01.14', size: 'medium' },
+            { id: 3, src: 'https://images.unsplash.com/photo-1605540436563-5bca919ae766?w=800', category: 'advanced', title: '상급 슬로프 정복', date: '2025.01.13', size: 'tall' },
+            { id: 4, src: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800', category: 'kids', title: '꼬마 스키어 탄생', date: '2025.01.12', size: 'medium' },
+            { id: 5, src: 'https://images.unsplash.com/photo-1609140445127-e0c01f2b4ed2?w=800', category: 'beginner', title: '기초반 단체 사진', date: '2025.01.11', size: 'small' },
+            { id: 6, src: 'https://images.unsplash.com/photo-1520820984457-6be944a2d20e?w=800', category: 'alpine', title: '알파인 레이싱', date: '2025.01.10', size: 'large' },
+            { id: 7, src: 'https://images.unsplash.com/photo-1486426435049-6e761ee4b621?w=800', category: 'intermediate', title: '중급반 스킬업', date: '2025.01.09', size: 'small' },
+            { id: 8, src: 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=800', category: 'advanced', title: '프리스타일 점프', date: '2025.01.08', size: 'tall' },
+            { id: 9, src: 'https://images.unsplash.com/photo-1516939884455-1445c8652f83?w=800', category: 'kids', title: '키즈 스키 캠프', date: '2025.01.07', size: 'medium' },
+            { id: 10, src: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800', category: 'beginner', title: '스키 첫걸음', date: '2025.01.06', size: 'large' },
+            { id: 11, src: 'https://images.unsplash.com/photo-1422207134147-65fb81f59e38?w=800', category: 'alpine', title: '게이트 훈련', date: '2025.01.05', size: 'medium' },
+            { id: 12, src: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800', category: 'intermediate', title: '턴 기술 향상', date: '2025.01.04', size: 'small' },
+            { id: 13, src: 'https://images.unsplash.com/photo-1517315003714-a071486bd9ea?w=800', category: 'kids', title: '어린이 스키 교실', date: '2025.01.03', size: 'tall' },
+            { id: 14, src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800', category: 'advanced', title: '파우더 스노우', date: '2025.01.02', size: 'medium' },
+            { id: 15, src: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800', category: 'alpine', title: '알파인 시즌권 회원', date: '2025.01.01', size: 'large' },
+            { id: 16, src: 'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=800', category: 'beginner', title: '가족 스키 여행', date: '2024.12.31', size: 'small' },
+        ];
+
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        });
+
+        // Floating Snow
+        function createFloatingSnow() {
+            const container = document.getElementById('floatingSnow');
+            for (let i = 0; i < 30; i++) {
+                const snow = document.createElement('div');
+                snow.className = 'snow-flake';
+                snow.innerHTML = '❄';
+                snow.style.left = Math.random() * 100 + '%';
+                snow.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                snow.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                snow.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(snow);
+            }
+        }
+        createFloatingSnow();
+
+        // Generate Gallery
+        function generateGallery(filter = 'all') {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = '';
+
+            const filteredData = filter === 'all'
+                ? galleryData
+                : galleryData.filter(item => item.category === filter);
+
+            filteredData.forEach((item, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = `gallery-item ${item.size}`;
+                galleryItem.dataset.index = index;
+                galleryItem.dataset.category = item.category;
+
+                const categoryLabels = {
+                    beginner: '초급반',
+                    intermediate: '중급반',
+                    advanced: '상급반',
+                    kids: '키즈반',
+                    alpine: '알파인'
+                };
+
+                galleryItem.innerHTML = `
+                    <img src="${item.src}" alt="${item.title}" onload="this.classList.add('loaded')">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <span class="gallery-category">${categoryLabels[item.category]}</span>
+                            <h3 class="gallery-title">${item.title}</h3>
+                            <p class="gallery-date">${item.date}</p>
+                        </div>
+                    </div>
+                    <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+                `;
+
+                galleryItem.addEventListener('click', () => openLightbox(item, filteredData));
+
+                grid.appendChild(galleryItem);
+
+                // Animate in
+                setTimeout(() => {
+                    galleryItem.classList.add('visible');
+                }, index * 100);
+            });
+        }
+
+        // Filter Tabs
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                generateGallery(this.dataset.filter);
+            });
+        });
+
+        // Lightbox
+        let currentLightboxIndex = 0;
+        let currentLightboxData = [];
+
+        function openLightbox(item, data) {
+            currentLightboxData = data;
+            currentLightboxIndex = data.findIndex(d => d.id === item.id);
+            updateLightbox();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateLightbox() {
+            const item = currentLightboxData[currentLightboxIndex];
+            document.getElementById('lightboxImg').src = item.src;
+            document.getElementById('lightboxTitle').textContent = item.title;
+            document.getElementById('lightboxDate').textContent = item.date;
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+
+        document.getElementById('lightboxPrev').addEventListener('click', () => {
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxData.length) % currentLightboxData.length;
+            updateLightbox();
+        });
+
+        document.getElementById('lightboxNext').addEventListener('click', () => {
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxData.length;
+            updateLightbox();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') document.getElementById('lightboxPrev').click();
+            if (e.key === 'ArrowRight') document.getElementById('lightboxNext').click();
+        });
+
+        // Counter Animation
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 20);
+        }
+
+        // Stats Observer
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    const numberEl = entry.target.querySelector('.stat-number');
+                    if (numberEl && numberEl.dataset.target) {
+                        animateCounter(numberEl, parseInt(numberEl.dataset.target));
+                        delete numberEl.dataset.target;
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-item').forEach(item => {
+            statsObserver.observe(item);
+        });
+
+        // Initialize
+        generateGallery();
+    </script>
+</body>
+</html>
