@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항 - SKI LESSON</title>
+    <title>공지사항 - 지산스키스쿨</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        .page-header {
+            background-image: url('https://images.unsplash.com/photo-1520310910957-0c539cb2589e?w=1920');
+        }
+
         .notice-section {
             padding: var(--spacing-6xl) var(--spacing-3xl);
-            background: var(--color-snow-white);
+            background: var(--bg-snow);
+            min-height: 50vh;
         }
 
         .notice-container {
@@ -20,351 +25,55 @@
             margin: 0 auto;
         }
 
-        .notice-filters {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--spacing-xl);
-            flex-wrap: wrap;
-            gap: var(--spacing-md);
-        }
-
-        .notice-tabs {
-            display: flex;
-            gap: var(--spacing-sm);
-        }
-
-        .notice-tab {
-            padding: var(--spacing-sm) var(--spacing-lg);
-            border: 2px solid var(--color-light-gray);
-            background: white;
-            border-radius: var(--radius-3xl);
-            font-size: var(--font-size-sm);
-            font-weight: var(--font-weight-medium);
-            cursor: pointer;
-            transition: var(--transition-normal);
-        }
-
-        .notice-tab:hover,
-        .notice-tab.active {
-            border-color: var(--color-primary);
-            background: var(--color-primary);
-            color: white;
-        }
-
-        .notice-search {
-            display: flex;
-            gap: var(--spacing-sm);
-        }
-
-        .notice-search input {
-            padding: var(--spacing-sm) var(--spacing-lg);
-            border: 2px solid var(--color-light-gray);
-            border-radius: var(--radius-full);
-            width: 250px;
-            font-size: var(--font-size-sm);
-        }
-
-        .notice-search input:focus {
-            outline: none;
-            border-color: var(--color-primary);
-        }
-
-        .notice-search button {
-            padding: var(--spacing-sm) var(--spacing-lg);
-            background: var(--color-primary);
-            color: white;
-            border: none;
-            border-radius: var(--radius-full);
-            cursor: pointer;
-        }
-
-        .notice-list {
-            background: white;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-md);
-            overflow: hidden;
-        }
-
-        .notice-header {
-            display: grid;
-            grid-template-columns: 80px 1fr 150px 100px;
-            padding: var(--spacing-md) var(--spacing-xl);
-            background: var(--color-primary);
-            color: white;
-            font-weight: var(--font-weight-semibold);
-            font-size: var(--font-size-sm);
-        }
-
-        .notice-item {
-            display: grid;
-            grid-template-columns: 80px 1fr 150px 100px;
-            padding: var(--spacing-lg) var(--spacing-xl);
-            border-bottom: 1px solid var(--color-light-gray);
-            align-items: center;
-            cursor: pointer;
-            transition: var(--transition-normal);
-        }
-
-        .notice-item:hover {
-            background: var(--color-snow-white);
-        }
-
-        .notice-item:last-child {
-            border-bottom: none;
-        }
-
-        .notice-num {
-            font-weight: var(--font-weight-semibold);
-            color: var(--color-text-light);
-        }
-
-        .notice-title-wrap {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-
-        .notice-badge {
-            padding: 2px var(--spacing-sm);
-            border-radius: var(--radius-sm);
-            font-size: var(--font-size-xs);
-            font-weight: var(--font-weight-semibold);
-        }
-
-        .notice-badge.important {
-            background: var(--color-danger);
-            color: white;
-        }
-
-        .notice-badge.new {
-            background: var(--color-success);
-            color: white;
-        }
-
-        .notice-badge.event {
-            background: var(--color-accent);
-            color: white;
-        }
-
-        .notice-title {
-            font-weight: var(--font-weight-medium);
-            color: var(--color-text-dark);
-        }
-
-        .notice-date, .notice-views {
-            font-size: var(--font-size-sm);
-            color: var(--color-text-light);
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            margin-top: var(--spacing-xl);
-        }
-
-        .page-btn {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--color-light-gray);
-            background: white;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: var(--transition-normal);
-            font-size: var(--font-size-sm);
-        }
-
-        .page-btn:hover,
-        .page-btn.active {
-            background: var(--color-primary);
-            color: white;
-            border-color: var(--color-primary);
-        }
-
-        /* Notice Detail Modal */
-        .notice-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: var(--z-modal);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition-normal);
-        }
-
-        .notice-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background: white;
-            width: 90%;
-            max-width: 700px;
-            max-height: 80vh;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            transform: translateY(20px);
-            transition: var(--transition-normal);
-        }
-
-        .notice-modal.active .modal-content {
-            transform: translateY(0);
-        }
-
-        .modal-header {
-            padding: var(--spacing-xl);
-            border-bottom: 1px solid var(--color-light-gray);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .modal-title {
-            font-size: var(--font-size-lg);
-            font-weight: var(--font-weight-bold);
-            color: var(--color-text-dark);
-        }
-
-        .modal-meta {
-            font-size: var(--font-size-sm);
-            color: var(--color-text-light);
-            margin-top: var(--spacing-sm);
-        }
-
-        .modal-close {
-            width: 36px;
-            height: 36px;
-            background: var(--color-snow-white);
-            border: none;
-            border-radius: var(--radius-circle);
-            cursor: pointer;
-            font-size: var(--font-size-lg);
-        }
-
-        .modal-body {
-            padding: var(--spacing-xl);
-            max-height: 50vh;
-            overflow-y: auto;
-            line-height: var(--line-height-relaxed);
-            color: var(--color-text-body);
-        }
-
         @media (max-width: 768px) {
-            .notice-header,
-            .notice-item {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-sm);
-            }
-
-            .notice-header {
-                display: none;
-            }
-
-            .notice-num {
-                display: none;
-            }
-
-            .notice-filters {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .notice-search input {
-                width: 100%;
+            .notice-section {
+                padding-left: var(--spacing-xl);
+                padding-right: var(--spacing-xl);
             }
         }
     </style>
 </head>
 <body>
-    <div class="loader" id="loader"><div class="loader-spinner"></div></div>
-
-    <header class="header solid">
-        <a href="index.html" class="logo"><div class="logo-icon"></div>SKI LESSON</a>
+    <header class="header">
+        <a href="index.html" class="logo"><div class="logo-icon"></div>지산스키스쿨</a>
         <nav class="nav" id="nav">
             <a href="products.html">강습 상품</a>
             <a href="gallery.html">강습 갤러리</a>
-            <a href="booking.html" class="nav-btn">예약하기</a>
+            <a href="booking.html">예약하기</a>
             <a href="reviews.html">후기</a>
             <a href="rental.html">직영 렌탈샵</a>
             <a href="faq.html">자주묻는질문</a>
             <a href="notice.html" class="active">공지</a>
         </nav>
-        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        <div class="header-right">
+            <a href="tel:010-1234-5678" class="header-phone"><i class="fas fa-phone"></i><span>전화문의 및 예약</span></a>
+            <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        </div>
     </header>
 
     <section class="page-header">
+        <div class="speed-lines">
+            <div class="speed-line" style="top:25%;width:190px;animation-delay:0.2s"></div>
+            <div class="speed-line" style="top:55%;width:150px;animation-delay:0.6s"></div>
+            <div class="speed-line" style="top:80%;width:170px;animation-delay:1s"></div>
+        </div>
         <div class="page-header-content">
             <span class="page-tag"><i class="fas fa-bullhorn"></i> NOTICE</span>
             <h1 class="page-title">공지사항</h1>
-            <p class="page-subtitle">SKI LESSON의 새로운 소식을 확인하세요</p>
+            <p class="page-subtitle">지산스키스쿨의 새로운 소식을 확인하세요</p>
         </div>
     </section>
 
     <section class="notice-section">
         <div class="notice-container">
-            <div class="notice-filters">
-                <div class="notice-tabs">
-                    <button class="notice-tab active" data-type="all">전체</button>
-                    <button class="notice-tab" data-type="important">중요</button>
-                    <button class="notice-tab" data-type="event">이벤트</button>
-                    <button class="notice-tab" data-type="normal">일반</button>
-                </div>
-                <div class="notice-search">
-                    <input type="text" placeholder="검색어를 입력하세요" id="searchInput">
-                    <button><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-
-            <div class="notice-list">
-                <div class="notice-header">
-                    <span>번호</span>
-                    <span>제목</span>
-                    <span>등록일</span>
-                    <span>조회수</span>
-                </div>
-                <div id="noticeList"></div>
-            </div>
-
-            <div class="pagination">
-                <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
+            <!-- 공지사항 내용이 들어갈 영역입니다 -->
         </div>
     </section>
-
-    <!-- Modal -->
-    <div class="notice-modal" id="noticeModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h2 class="modal-title" id="modalTitle"></h2>
-                    <p class="modal-meta" id="modalMeta"></p>
-                </div>
-                <button class="modal-close" onclick="closeModal()">&times;</button>
-            </div>
-            <div class="modal-body" id="modalBody"></div>
-        </div>
-    </div>
 
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <a href="index.html" class="logo"><div class="logo-icon"></div>SKI LESSON</a>
+                <a href="index.html" class="logo"><div class="logo-icon"></div>지산스키스쿨</a>
                 <p>전문 강사진과 함께하는 최고의 스키 강습 서비스.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-instagram"></i></a>
@@ -372,74 +81,15 @@
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                 </div>
             </div>
-            <div class="footer-column"><h4>강습 프로그램</h4><ul><li><a href="products.html">프리미엄 강습</a></li><li><a href="products.html">시즌 강습</a></li></ul></div>
+            <div class="footer-column"><h4>강습 프로그램</h4><ul><li><a href="products.html">강습 요금표</a></li></ul></div>
             <div class="footer-column"><h4>고객 지원</h4><ul><li><a href="faq.html">자주 묻는 질문</a></li><li><a href="notice.html">공지사항</a></li></ul></div>
-            <div class="footer-column"><h4>연락처</h4><ul><li><i class="fas fa-phone"></i> 02-1234-5678</li><li><i class="fas fa-envelope"></i> info@skilesson.kr</li></ul></div>
+            <div class="footer-column"><h4>연락처</h4><ul><li><i class="fas fa-phone"></i> 010-1234-5678</li><li><i class="fas fa-envelope"></i> info@jisanski.kr</li></ul></div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2025 SKI LESSON. All rights reserved.</p></div>
+        <div class="footer-bottom"><p>&copy; 2025 지산스키스쿨. All rights reserved.</p></div>
     </footer>
 
     <script>
-        window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('hidden'), 500));
         document.getElementById('menuToggle').addEventListener('click', () => document.getElementById('nav').classList.toggle('active'));
-
-        const notices = [
-            { id: 1, type: 'important', badge: '중요', title: '[필독] 2024-2025 시즌 운영 안내', date: '2025.01.15', views: 1523, content: '안녕하세요, SKI LESSON입니다.\n\n2024-2025 시즌 운영 관련 안내드립니다.\n\n■ 운영 기간: 2024.12.01 ~ 2025.03.31\n■ 운영 시간: 매일 08:00 ~ 18:00\n■ 휴무일: 매월 첫째, 셋째 월요일\n\n많은 이용 부탁드립니다.' },
-            { id: 2, type: 'event', badge: '이벤트', title: '[이벤트] 첫 강습 20% 할인 이벤트', date: '2025.01.14', views: 892, content: '첫 강습을 예약하시는 모든 분들께 20% 할인 혜택을 드립니다!\n\n■ 이벤트 기간: 2025.01.01 ~ 2025.01.31\n■ 대상: 신규 회원\n■ 할인: 모든 강습 20% 할인\n\n예약 시 쿠폰코드 "FIRST20" 입력' },
-            { id: 3, type: 'new', badge: 'NEW', title: '2025년 알파인 시즌 강습 오픈', date: '2025.01.13', views: 654, content: '전문적인 알파인 스키를 배우고 싶은 분들을 위한 시즌 강습이 오픈되었습니다.\n\n자세한 내용은 강습 상품 페이지를 확인해주세요.' },
-            { id: 4, type: 'normal', badge: '', title: '렌탈샵 신규 장비 입고 안내', date: '2025.01.12', views: 445, content: '2025년형 최신 스키/보드 장비가 입고되었습니다.\n\n더욱 쾌적하고 안전한 장비로 강습 받으실 수 있습니다.' },
-            { id: 5, type: 'normal', badge: '', title: '설 연휴 운영 시간 안내', date: '2025.01.10', views: 387, content: '설 연휴 기간 정상 운영합니다.\n\n단, 1월 28일~30일은 예약이 조기 마감될 수 있으니 미리 예약해주세요.' },
-            { id: 6, type: 'important', badge: '중요', title: '개인정보처리방침 개정 안내', date: '2025.01.08', views: 234, content: '개인정보처리방침이 일부 개정되었습니다.\n\n개정일: 2025.01.15\n주요 변경사항: 제3자 정보제공 관련 조항 추가\n\n자세한 내용은 개인정보처리방침 페이지를 확인해주세요.' },
-            { id: 7, type: 'event', badge: '이벤트', title: '[마감임박] 시즌권 얼리버드 특가', date: '2025.01.05', views: 1102, content: '시즌 강습권 얼리버드 특가가 곧 마감됩니다!\n\n최대 30% 할인된 가격으로 시즌 강습을 등록하세요.\n\n마감: 2025.01.20' },
-        ];
-
-        function renderNotices(type = 'all') {
-            const list = document.getElementById('noticeList');
-            list.innerHTML = '';
-
-            const filtered = type === 'all' ? notices : notices.filter(n => n.type === type);
-
-            filtered.forEach((notice, i) => {
-                const item = document.createElement('div');
-                item.className = 'notice-item';
-                item.innerHTML = `
-                    <span class="notice-num">${notice.id}</span>
-                    <div class="notice-title-wrap">
-                        ${notice.badge ? `<span class="notice-badge ${notice.type}">${notice.badge}</span>` : ''}
-                        <span class="notice-title">${notice.title}</span>
-                    </div>
-                    <span class="notice-date">${notice.date}</span>
-                    <span class="notice-views">${notice.views}</span>
-                `;
-                item.addEventListener('click', () => openModal(notice));
-                list.appendChild(item);
-            });
-        }
-
-        function openModal(notice) {
-            document.getElementById('modalTitle').textContent = notice.title;
-            document.getElementById('modalMeta').textContent = `등록일: ${notice.date} | 조회수: ${notice.views}`;
-            document.getElementById('modalBody').innerHTML = notice.content.replace(/\n/g, '<br>');
-            document.getElementById('noticeModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('noticeModal').classList.remove('active');
-        }
-
-        document.getElementById('noticeModal').addEventListener('click', e => {
-            if (e.target.id === 'noticeModal') closeModal();
-        });
-
-        document.querySelectorAll('.notice-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.notice-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                renderNotices(this.dataset.type);
-            });
-        });
-
-        renderNotices();
     </script>
 </body>
 </html>
